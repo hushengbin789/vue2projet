@@ -1,0 +1,16 @@
+/* 覆盖vex-table默认样式 */
+/* 鼠标滑过表格的颜色 */
+.vxe-table .vxe-body--row.row--hover,
+.vxe-table .vxe-body--row.row--hover.row--stripe,
+.vxe-table .vxe-body--row.row--hover.row--stripe .vxe-tree--btn-wrapper,
+.vxe-table .vxe-body--row.row--hover .vxe-tree--btn-wrapper
+{
+  background-color:#ebf7ff
+}
+
+/*loading*/
+.vxe-loading,
+.vxe-grid.is--loading:before,
+.vxe-pager.is--loading:after {
+  background-color:rgba(255, 255, 255, 0.9);
+}
