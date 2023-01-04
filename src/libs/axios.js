@@ -1,5 +1,6 @@
 import Axios from 'axios'
 // import { baseURL } from '_conf/url'
+import { Message } from 'view-design'
 import { getToken, setToken } from '@/libs/util'
 
 class httpRequest {
