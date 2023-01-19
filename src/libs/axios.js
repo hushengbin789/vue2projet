@@ -3,6 +3,7 @@ import Axios from 'axios'
 import { Message } from 'view-design'
 import { getToken, setToken } from '@/libs/util'
 
+import SHA256 from './sha256'
 class httpRequest {
   constructor() {
     this.options = {
@@ -25,6 +26,13 @@ class httpRequest {
       if (!config.url.includes('/login')) {
         config.headers.Authorization = getToken()
         config.headers['system-name'] = 'logistics_engine_web'
+      } else {
+        const _time = new Date().getTime() + ''
+        if (config.method.toLowerCase() == 'post') {
+          if (!config.data) config.data = {}
+          config.data.time = _time
+          config.data.signature = SHA256(_time).slice(16, -16)
+        }
       }
       return config
     }, error => {

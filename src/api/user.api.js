@@ -6,7 +6,6 @@ export const login = newPer => {
     url: '/usermgt-n/login',
     method: 'post',
     data: {
-      method: '',
       args: JSON.stringify(newPer)
     }
   })

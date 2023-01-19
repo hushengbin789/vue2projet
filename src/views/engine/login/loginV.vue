@@ -7,12 +7,18 @@
     <Button type="success" @click="fn2">num--</Button>
     <br>
     <Button type="info" @click="()=>{this.$router.go(-1)}">主页</Button>
+    <br>
+    <login></login>
   </div>
 </template>
 
 <script>
+import login from './login.vue'
 export default {
   name: 'loginV',
+  components: {
+    login
+  },
   data() {
     return {
       num1: this.$store.state.num
@@ -30,3 +36,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.login{
+  height: 100vh;
+}
+</style>

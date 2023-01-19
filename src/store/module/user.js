@@ -1,15 +1,18 @@
 
-import { getToken, setToken } from '@/libs/util'
+import { /*  getToken, */ setToken } from '@/libs/util'
 import {
   getMenuCodes,
   getAllMenus
 } from '@/api/menu.opt.api'
+import { login } from '@/api/user.api'
+import { Base64 } from 'js-base64'
 export default {
   state: {
     userName: '',
     userId: '',
     avatorImgPath: '',
-    token: getToken(),
+    token: '',
+    token2: '',
     access: '',
 
     userInfo: null,
@@ -23,9 +26,15 @@ export default {
     setUserId(state, id) {
       state.userId = id
     },
+    // 旧系统token
     setToken(state, token) {
       state.token = token
-      setToken(token)
+      setToken(token, 'token')
+    },
+    // 新系统token
+    setToken2(state, token) {
+      state.token2 = token
+      setToken(token, 'token2')
     },
     setUserInfo(state, userInfo) {
       state.userInfo = userInfo
@@ -59,6 +68,39 @@ export default {
           commit('setMenus', res.data.result[0])
         }).catch(function(err) {
           console.log(err)
+        })
+      })
+    },
+    // 登录
+    handleLogin({ commit },
+      {
+        userName,
+        password
+      }) {
+      userName = userName.trim()
+      return new Promise((resolve, reject) => {
+        const temp = Base64.encode(password)
+        console.log('登录+加密', temp)
+        console.log('登录+解码', Base64.decode(temp))
+        login({
+          employeeNo: userName,
+          password: Base64.encode(password)
+        }).then(resp => {
+          const result = resp.data.result
+          console.log('登录1', result)
+          // commit('setToken', result.oldAccessToken)
+          // commit('setToken2', result.accessToken)
+          if (result) {
+            resolve(result)
+          } else {
+            reject(new Error('token 信息不存在'))
+          }
+        }).catch(err => {
+          if (err.data.code === '150014') {
+            Message.error('错误代码【' + err.data.code + '】，' + '账户已被禁用，请联系管理员操作~')
+          } else {
+            Message.error('错误代码【' + err.data.code + '】，' + err.data.message)
+          }
         })
       })
     }

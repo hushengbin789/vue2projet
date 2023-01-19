@@ -26,6 +26,7 @@ document.addEventListener('visibilitychange', async() => { // 浏览器切换事
         const userInfo = res.data.result
         console.log('userInfo', userInfo)
         // 设置用户信息
+        store.commit('setUserInfo', userInfo)
         store.commit('setAvator', userInfo.avatar)
         store.commit('setUserName', userInfo.name || userInfo.employeeNo)
         store.commit('setUserId', userInfo.employeeNo) // 当前登录人工号
