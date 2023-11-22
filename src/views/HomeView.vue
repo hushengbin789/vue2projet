@@ -7,7 +7,8 @@
       <router-link to="/login">login</router-link> |
       <router-link to="/timeLiness">timeLiness</router-link> |
       <router-link to="/sync-log">sync-log</router-link>|
-      <router-link to="/BI-logisticsOverview">BI-logisticsOverview</router-link>
+      <router-link to="/BI-logisticsOverview">BI-logisticsOverview</router-link>|
+      <router-link to="/presc-time">妥投超时</router-link>
     </nav>
     <Button type="info">Info</Button>
     <Button type="success">Success</Button>
@@ -28,6 +29,8 @@ export default {
     HelloWorld
   },
   mounted() {
+    this.$store.dispatch('getAllSalechannels')
+    this.$store.dispatch('getAllCountries')
     this.$store.dispatch('getAllShippingmethodss')
   }
 }

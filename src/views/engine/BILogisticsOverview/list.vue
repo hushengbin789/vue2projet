@@ -152,7 +152,7 @@ export default {
   data() {
     return {
       shippingmethodss2: [],
-      saleChannels: [],
+      // saleChannels: [],
       shippingMethodFilter: false, // 筛选物流方式
       shippingCompanyOpts: {}, // 物流商
       salechannelOpts: {}, // 平台
@@ -490,8 +490,8 @@ export default {
   computed: {
     // 使用对象展开运算符将 getter 混入 computed 对象中
     ...mapGetters([
-      'shippingmethodss'/* , // 物流方式
-      'saleChannels', // 销售渠道
+      'shippingmethodss', // 物流方式
+      'saleChannels'/* , // 销售渠道
       'countries' // 国家 */
     ]),
     onShippingmethodObjs() { // 已启用物流方式

@@ -10,3 +10,24 @@ export const getAllShippingmethodss = args => {
     }
   })
 }
+// 获取所有国家
+export const getAllCountries = args => {
+  return axios.request({
+    url: '/logistics-engine/common',
+    method: 'post',
+    data: {
+      method: 'getAllCountries',
+      args: JSON.stringify(args)
+    }
+  })
+}
+// 获取平台
+export const getAllSalechannels = (args = {}) => {
+  return axios.request({
+    url: '/logistics-engine/common',
+    method: 'post',
+    data: {
+      method: 'getAllSalechannels'
+    }
+  })
+}
