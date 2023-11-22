@@ -40,6 +40,11 @@ export default [
     component: () => import('@/views/engine/BILogisticsOverview/list.vue')
   },
   {
+    path: '/presc-time',
+    name: 'presc-time',
+    component: () => import('@/views/engine/prescTime/list.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     // route level code-splitting

@@ -190,16 +190,16 @@ export default {
               /**
               * 获取本周、本季度、本月、上月的开端日期、停止日期
               */
-              var now = new Date() // 当前日期
-              var nowDay = now.getDate() // 当前日
-              var nowMonth = now.getMonth() // 当前月
-              var nowYear = now.getYear() // 当前年
+              const now = new Date() // 当前日期
+              const nowDay = now.getDate() // 当前日
+              const nowMonth = now.getMonth() // 当前月
+              let nowYear = now.getYear() // 当前年
               nowYear += (nowYear < 2000) ? 1900 : 0 //
               // 格局化日期：yyyy-MM-dd
               function formatDate(date) {
-                var myyear = date.getFullYear()
-                var mymonth = date.getMonth() + 1
-                var myweekday = date.getDate()
+                const myyear = date.getFullYear()
+                let mymonth = date.getMonth() + 1
+                let myweekday = date.getDate()
 
                 if (mymonth < 10) {
                   mymonth = '0' + mymonth
@@ -215,14 +215,14 @@ export default {
               }
               // 获得本月的开端日期
               function getMonthStartDate() {
-                var monthStartDate1 = new Date(nowYear, nowMonth, 1)
-                let str = formatDate(monthStartDate1)
+                const monthStartDate1 = new Date(nowYear, nowMonth, 1)
+                const str = formatDate(monthStartDate1)
                 return str
               }
               // 获得本月的停止日期
               function getMonthEndDate() {
-                var monthEndDate1 = new Date(nowYear, nowMonth, getMonthDays(nowMonth))
-                let str = formatDate(monthEndDate1)
+                const monthEndDate1 = new Date(nowYear, nowMonth, getMonthDays(nowMonth))
+                const str = formatDate(monthEndDate1)
                 return str
               }
               console.log('本月', getMonthStartDate(), getMonthEndDate())
@@ -292,8 +292,8 @@ export default {
     },
     getDeliverySummary2() { // 显示物流方式
       commonOpr.getAllShippingmethodss().then(res => { // 获取物流方式
-        let obj = res.data.result
-        let map = new Map(Object.entries(obj))
+        const obj = res.data.result
+        const map = new Map(Object.entries(obj))
         this.mapp = map
       }).catch(function(err) {
         console.log(err)
@@ -376,7 +376,7 @@ export default {
     },
     initAll() {
       this.$nextTick(() => {
-        let datas = this.data
+        const datas = this.data
         if (this.args1.isDate) {
           this.initBar('collect1', { title: '发货汇总', data: datas.data1 || [] })
         }
@@ -466,9 +466,9 @@ export default {
     // 横向-柱状图 - 发货汇总 -  按日期
     initBar(id, data) {
       // console.log('val', id, data)
-      var chartDom = document.getElementById(id)
-      var myChart = echarts.init(chartDom)
-      var option = {
+      const chartDom = document.getElementById(id)
+      const myChart = echarts.init(chartDom)
+      const option = {
         title: {
           left: 'center',
           text: data.title
@@ -542,10 +542,10 @@ export default {
           left: 'right',
           selected: {
             // 选中'票量'
-            '票量': true,
+            票量: true,
             // 不选中'重量' 平均重量
-            '重量': false,
-            '平均重量': false
+            重量: false,
+            平均重量: false
           },
           top: 'top'
         },
@@ -606,11 +606,11 @@ export default {
         this.dom1.setOption(option)
         on(window, 'resize', this.resize1())
       })
-      let that = this
+      const that = this
       // 3、在渲染点击事件之前先清除点击事件
       myChart.getZr().off('click')
       myChart.getZr().on('mousemove', param => {
-        var pointInPixel = [param.offsetX, param.offsetY]
+        const pointInPixel = [param.offsetX, param.offsetY]
         if (myChart.containPixel('grid', pointInPixel)) {
           // 若鼠标滑过区域位置在当前图表范围内 鼠标设置为小手
           myChart.getZr().setCursorStyle('pointer')
@@ -619,13 +619,13 @@ export default {
         }
       })
       myChart.getZr().on('click', params => {
-        var pointInPixel = [params.offsetX, params.offsetY]
+        const pointInPixel = [params.offsetX, params.offsetY]
         // 判断给定的点是否在指定的坐标系
         if (myChart.containPixel('grid', pointInPixel)) {
-          let xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
-          let option = myChart.getOption()
-          let xAxis = option.xAxis
-          let name = xAxis[0].data[xIndex]
+          const xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
+          const option = myChart.getOption()
+          const xAxis = option.xAxis
+          const name = xAxis[0].data[xIndex]
           if (name != undefined || name == '') {
             that.$router.push({ // 跳转发货汇总统计
               name: 'collect',
@@ -642,10 +642,10 @@ export default {
     // 横向-柱状图 - 发货汇总-平台
     initBar1_1(id, data) {
       // console.log('val-initBar1_1', id, data)
-      var chartDom = document.getElementById(id)
+      const chartDom = document.getElementById(id)
       if (!chartDom) return
-      var myChart = echarts.init(chartDom)
-      var option = {
+      const myChart = echarts.init(chartDom)
+      const option = {
         title: {
           left: 'center',
           text: data.title == '平台汇总' ? '平台汇总' : '物流方式汇总'
@@ -672,10 +672,10 @@ export default {
           left: 'right',
           selected: {
             // 选中'票量'
-            '票量': true,
+            票量: true,
             // 不选中'重量' 平均重量
-            '重量': false,
-            '平均重量': false
+            重量: false,
+            平均重量: false
           },
           top: 'top'
         },
@@ -729,7 +729,7 @@ export default {
           }
         ]
       }
-      let that = this
+      const that = this
       // 1、清除画布
       myChart.clear()
       /// 3、在渲染点击事件之前先清除点击事件
@@ -737,7 +737,7 @@ export default {
 
       myChart.getZr().off('click')
       myChart.getZr().on('mousemove', param => {
-        var pointInPixel = [param.offsetX, param.offsetY]
+        const pointInPixel = [param.offsetX, param.offsetY]
         if (myChart.containPixel('grid', pointInPixel)) {
           // 若鼠标滑过区域位置在当前图表范围内 鼠标设置为小手
           myChart.getZr().setCursorStyle('pointer')
@@ -746,13 +746,13 @@ export default {
         }
       })
       myChart.getZr().on('click', params => {
-        var pointInPixel = [params.offsetX, params.offsetY]
+        const pointInPixel = [params.offsetX, params.offsetY]
         // 判断给定的点是否在指定的坐标系
         if (myChart.containPixel('grid', pointInPixel)) {
-          let xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
-          let option = myChart.getOption()
-          let xAxis = option.xAxis
-          let name = xAxis[0].data[xIndex]
+          const xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
+          const option = myChart.getOption()
+          const xAxis = option.xAxis
+          const name = xAxis[0].data[xIndex]
           if (that.args1.isSalechannel && name) { // 平台汇总
             that.args1.salechannel = name
             that.args1.isSalechannel = false
@@ -775,10 +775,10 @@ export default {
     // 横向-柱状图 - 发货汇总-物流方式
     initBar1_2(id, data) {
       // console.log('val', id, data)
-      var chartDom = document.getElementById(id)
+      const chartDom = document.getElementById(id)
       if (!chartDom) return
-      var myChart = echarts.init(chartDom)
-      var option = {
+      const myChart = echarts.init(chartDom)
+      const option = {
         title: {
           left: 'center',
           text: data.title == '平台汇总' ? '平台汇总' : '物流方式汇总'
@@ -790,12 +790,12 @@ export default {
           },
           formatter: params => {
             // let dataIndex = params[0].dataIndex // 索引
-            let axisValue1 = params[0].axisValue // 标题 axisValue
+            const axisValue1 = params[0].axisValue // 标题 axisValue
             let name1 = ''
             let name2 = ''
             let name3 = ''
             let str = ''
-            let title = this.mapp.get(axisValue1)
+            const title = this.mapp.get(axisValue1)
             if (params.length == 1) { // 只显示一个
               if (params[0].seriesName == '票量') { // '票量'
                 name1 = params[0].value
@@ -849,10 +849,10 @@ export default {
           left: 'right',
           selected: {
             // 选中'票量'
-            '票量': true,
+            票量: true,
             // 不选中'重量' 平均重量
-            '重量': false,
-            '平均重量': false
+            重量: false,
+            平均重量: false
           },
           top: 'top'
         },
@@ -872,9 +872,9 @@ export default {
             lineHeight: 18,
             formatter: function(params) {
               // console.log('formatter', params, params.length)
-              var newParamsName = ''// 最终拼接成的字符串
-              var paramsNameNumber = params.length// 实际标签的个数
-              var provideNumber = 6// 每行能显示的字的个数
+              let newParamsName = ''// 最终拼接成的字符串
+              const paramsNameNumber = params.length// 实际标签的个数
+              const provideNumber = 6// 每行能显示的字的个数
               // 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
               if (paramsNameNumber > provideNumber) {
                 newParamsName = params.substring(0, 6) + '..'// 最终拼成的字符串
@@ -937,7 +937,7 @@ export default {
           on(window, 'resize', this.resize1())
         }
       })
-      let that = this
+      const that = this
       // 1、清除画布
       myChart.clear()
       /// 3、在渲染点击事件之前先清除点击事件
@@ -945,7 +945,7 @@ export default {
       myChart.getZr().off('click')
 
       myChart.getZr().on('mousemove', param => {
-        var pointInPixel = [param.offsetX, param.offsetY]
+        const pointInPixel = [param.offsetX, param.offsetY]
         if (myChart.containPixel('grid', pointInPixel)) {
           // 若鼠标滑过区域位置在当前图表范围内 鼠标设置为小手
           myChart.getZr().setCursorStyle('pointer')
@@ -954,13 +954,13 @@ export default {
         }
       })
       myChart.getZr().on('click', params => {
-        var pointInPixel = [params.offsetX, params.offsetY]
+        const pointInPixel = [params.offsetX, params.offsetY]
         // 判断给定的点是否在指定的坐标系
         if (myChart.containPixel('grid', pointInPixel)) {
-          let xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
-          let option = myChart.getOption()
-          let xAxis = option.xAxis
-          let name = xAxis[0].data[xIndex]
+          const xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
+          const option = myChart.getOption()
+          const xAxis = option.xAxis
+          const name = xAxis[0].data[xIndex]
           if (that.args1.isShippingMethod && name) { // 物流方式汇总
             that.args1.isCountry = true
             that.args1.isSalechannel = false
@@ -979,9 +979,9 @@ export default {
     // 横向-柱状图 - 发货汇总-国家汇总
     initBar1_3(id, data) {
       // console.log('val', id, data)
-      var chartDom = document.getElementById(id)
-      var myChart = echarts.init(chartDom)
-      var option = {
+      const chartDom = document.getElementById(id)
+      const myChart = echarts.init(chartDom)
+      const option = {
         title: {
           left: 'center',
           text: data.title
@@ -1008,10 +1008,10 @@ export default {
           left: 'right',
           selected: {
             // 选中'票量'
-            '票量': true,
+            票量: true,
             // 不选中'重量' 平均重量
-            '重量': false,
-            '平均重量': false
+            重量: false,
+            平均重量: false
           },
           top: 'top'
         },
@@ -1079,10 +1079,10 @@ export default {
     // 横向-柱状图 - 发货汇总-揽收公司
     initBar1_4(id, data) {
       // console.log('val-initBar1_4', id, data)
-      var chartDom = document.getElementById(id)
+      const chartDom = document.getElementById(id)
       if (!chartDom) return
-      var myChart = echarts.init(chartDom)
-      var option = {
+      const myChart = echarts.init(chartDom)
+      const option = {
         title: {
           left: 'center',
           text: data.title == '揽收公司汇总' ? '揽收公司汇总' : '----'
@@ -1093,8 +1093,8 @@ export default {
             type: 'shadow'
           },
           formatter: params => {
-            let dataIndex = params[0].dataIndex // 索引
-            let axisValue1 = params[0].axisValue // 标题
+            const dataIndex = params[0].dataIndex // 索引
+            const axisValue1 = params[0].axisValue // 标题
             let name1 = ''
             let name2 = ''
             let name3 = ''
@@ -1152,10 +1152,10 @@ export default {
           left: 'right',
           selected: {
             // 选中'票量'
-            '票量': true,
+            票量: true,
             // 不选中'重量' 平均重量
-            '重量': false,
-            '平均重量': false
+            重量: false,
+            平均重量: false
           },
           top: 'top'
         },
@@ -1175,9 +1175,9 @@ export default {
             lineHeight: 18,
             formatter: function(params) {
               // console.log('formatter', params, params.length)
-              var newParamsName = ''// 最终拼接成的字符串
-              var paramsNameNumber = params.length// 实际标签的个数
-              var provideNumber = 6// 每行能显示的字的个数
+              let newParamsName = ''// 最终拼接成的字符串
+              const paramsNameNumber = params.length// 实际标签的个数
+              const provideNumber = 6// 每行能显示的字的个数
               // 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
               if (paramsNameNumber > provideNumber) {
                 newParamsName = params.substring(0, 6) + '..'// 最终拼成的字符串
@@ -1234,7 +1234,7 @@ export default {
         this.dom1.setOption(option)
         on(window, 'resize', this.resize1())
       })
-      let that = this
+      const that = this
       // 1、清除画布
       myChart.clear()
       /// 3、在渲染点击事件之前先清除点击事件
@@ -1242,7 +1242,7 @@ export default {
 
       myChart.getZr().off('click')
       myChart.getZr().on('mousemove', param => {
-        var pointInPixel = [param.offsetX, param.offsetY]
+        const pointInPixel = [param.offsetX, param.offsetY]
         if (myChart.containPixel('grid', pointInPixel)) {
           // 若鼠标滑过区域位置在当前图表范围内 鼠标设置为小手
           myChart.getZr().setCursorStyle('pointer')
@@ -1251,13 +1251,13 @@ export default {
         }
       })
       myChart.getZr().on('click', params => {
-        var pointInPixel = [params.offsetX, params.offsetY]
+        const pointInPixel = [params.offsetX, params.offsetY]
         // 判断给定的点是否在指定的坐标系
         if (myChart.containPixel('grid', pointInPixel)) {
-          let xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
-          let option = myChart.getOption()
-          let xAxis = option.xAxis
-          let name = xAxis[0].data[xIndex]
+          const xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
+          const option = myChart.getOption()
+          const xAxis = option.xAxis
+          const name = xAxis[0].data[xIndex]
           if (that.args1.isCollectCompany && name) { // 揽收公司
             that.args1.collectCompanyCode = name
             that.args1.isCollectCompany = false
@@ -1272,9 +1272,9 @@ export default {
     },
     changeType1(val, id = 'collect1', data = { title: this.args1Title, data: this.data.data1 || [] }) { // 修改图表类型 - 发货汇总
       // console.log('val', val, this.data.data1, 'data:', data)
-      let realVal = val === '柱状图' ? 'bar' : 'line'
+      const realVal = val === '柱状图' ? 'bar' : 'line'
       this.type1 = realVal
-      var option = {
+      const option = {
         title: {
           left: 'center',
           text: data.title
@@ -1301,10 +1301,10 @@ export default {
           left: 'right',
           selected: {
             // 选中'票量'
-            '票量': true,
+            票量: true,
             // 不选中'重量' 平均重量
-            '重量': false,
-            '平均重量': false
+            重量: false,
+            平均重量: false
           },
           top: 'top'
         },
@@ -1321,8 +1321,8 @@ export default {
         color: ['#5b9bd5', '#ed7d31', '#a5a5a5', '#67e0e3'],
         yAxis: {
           type: 'value',
-          'axisLine': { // x轴坐标轴
-            'show': false
+          axisLine: { // x轴坐标轴
+            show: false
           },
           axisTick: {		// x轴刻度线
             show: false
@@ -1363,7 +1363,7 @@ export default {
         ]
       }
       this.$nextTick(() => {
-        var chartDom = document.getElementById(id)
+        const chartDom = document.getElementById(id)
         this.dom1 = echarts.init(chartDom)
         this.dom1.setOption(option)
         on(window, 'resize', this.resize1())
