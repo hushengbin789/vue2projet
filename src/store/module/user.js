@@ -19,6 +19,12 @@ export default {
     menus: null, // 所有的菜单
     menuPermission: [] // 当前用户的菜单权限
   },
+  getters: {
+    hasButtonPermission: state => permission => {
+      // return true;
+      return (state.menuPermission || []).includes(permission)
+    }
+  },
   mutations: {
     setAvator(state, avatorPath) {
       state.avatorImgPath = avatorPath

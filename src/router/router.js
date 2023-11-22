@@ -35,6 +35,11 @@ export default [
     component: () => import('@/views/engine/forecastMessage/sync-log')
   },
   {
+    path: '/BI-logisticsOverview',
+    name: 'BI-logisticsOverview',
+    component: () => import('@/views/engine/BILogisticsOverview/list.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     // route level code-splitting

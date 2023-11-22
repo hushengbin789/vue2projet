@@ -6,7 +6,8 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/login">login</router-link> |
       <router-link to="/timeLiness">timeLiness</router-link> |
-      <router-link to="/sync-log">sync-log</router-link>
+      <router-link to="/sync-log">sync-log</router-link>|
+      <router-link to="/BI-logisticsOverview">BI-logisticsOverview</router-link>
     </nav>
     <Button type="info">Info</Button>
     <Button type="success">Success</Button>
@@ -25,6 +26,9 @@ export default {
   name: 'HomeView',
   components: {
     HelloWorld
+  },
+  mounted() {
+    this.$store.dispatch('getAllShippingmethodss')
   }
 }
 </script>

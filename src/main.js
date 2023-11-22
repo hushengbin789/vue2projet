@@ -14,7 +14,9 @@ Vue.use(iView/* , {
 Vue.config.productionTip = false
 Vue.prototype.XEUtils = XEUtils
 Vue.use(plugin) // 注册自定义全局插件
-
+Vue.prototype.hasButtonPermission_1 = permission => {
+  return store.getters.hasButtonPermission(permission)
+}
 new Vue({
   router,
   store,

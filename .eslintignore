@@ -1,0 +1,4 @@
+# src
+src/components
+src/store/index.js
+src/views/engine/common
