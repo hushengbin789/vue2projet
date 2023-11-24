@@ -43,6 +43,50 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 功能14
+npm安装
+```sh
+npm install pptxgenjs --save
+```
+### 使用1
+```js
+// 引入PptxGenJS库
+import PptxGenJS from "pptxgenjs";
+
+// 创建PptxGenJS实例
+const pptx = new PptxGenJS();
+
+// 添加一个带有文本的幻灯片
+const slide = pptx.addSlide();
+slide.addText("Hello, PPT!", { x: 1, y: 1, font_size: 18 });
+
+// 添加另一个带有文本的幻灯片
+const slide2 = pptx.addSlide();
+slide2.addText("second Slide PPT", { x: 1, y: 1, font_size: 18 });
+
+// 保存PPTX文件
+pptx.save("presentation");
+```
+### 使用2
+```js
+// 引入PptxGenJS库
+import PptxGenJS from "pptxgenjs";
+
+exportPPT(){
+  // 创建PptxGenJS实例
+  const pptx = new PptxGenJS();
+
+  // 添加一个带有文本的幻灯片
+  const slide = pptx.addSlide();
+  slide.addText("Hello, PPT!", { x: 1, y: 1, font_size: 18 });
+
+  // 添加另一个带有文本的幻灯片
+  const slide2 = pptx.addSlide();
+  slide2.addText("second Slide PPT", { x: 1, y: 1, font_size: 18 });
+
+  // 保存PPTX文件
+  pptx.save("presentation");
+}
+```
 ![ppt PPT 前端ppt](./src/assets/ppt/20231124163740.png)
 ![ppt PPT 前端ppt](./src/assets/ppt/20231124163826.png)
 
