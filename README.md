@@ -17,7 +17,8 @@ vue2公共项目搭建
 + 10.js-cookie  cookie 相关
 + 11.vxe-table  xe-utils 虚拟滚动相关
 + 12.js-base64  加密、解密相关(编码和解码base64数据)
-+ 12.SHA256  加密、解密相关(编码和解码base64数据) 是一种哈希算法，它可以将任意长度的数据转换为256位的哈希值(即64个十六进制字符)
++ 13.SHA256  加密、解密相关(编码和解码base64数据) 是一种哈希算法，它可以将任意长度的数据转换为256位的哈希值(即64个十六进制字符)
++ 14.新增导出ppt功能
 ## Project setup
 ```
 npm install
@@ -40,3 +41,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## 功能14
+![ppt PPT 前端ppt](./src/assets/ppt/20231124163740.png)
+![ppt PPT 前端ppt](./src/assets/ppt/20231124163826.png)
+

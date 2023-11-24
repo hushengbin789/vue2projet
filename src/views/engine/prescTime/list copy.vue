@@ -64,7 +64,7 @@
     <Row>
       <i-col span="20"  style="text-align: left">
         <Button :loading="tableLoading" type="primary" style="margin-right: 4px" @click="batchExport">导出</Button>
-        <Button  type="primary" style="margin-right: 4px" @click="exportPPT">导出PPT</Button>
+        <Button :loading="tableLoading" type="primary" style="margin-right: 4px" @click="fn1">导出周报</Button>
       </i-col>
       <i-col span="4" style="text-align: right">
         <Button  :loading="tableLoading" type="primary" @click="searchList" class="es-button-right">查询</Button>
@@ -325,7 +325,7 @@ export default {
       }
       this.shippingmethodss2 = this.onShippingmethodObjs
     },
-    exportPPT() {
+    fn1() {
       // 1. 创建PPT
       const pres = new Pptxgen()
 
@@ -344,7 +344,28 @@ export default {
         fill: { color: 'F1F1F1' },
         align: 'left'
       })
+      // TABLE 1: Single-row table
+      // const rows1 = [['Cell 1', 'Cell 2', 'Cell 3']]
+      // slide.addTable(rows1, { w: 9 })
 
+      // // TABLE 2: Multi-row table
+      // // - each row's array element is an array of cells
+      // const rows2 = [['A1', 'B1', 'C1']]
+      // slide.addTable(rows2, { align: 'left', fontFace: 'Arial' })
+
+      // TABLE 3: Formatting at a cell level
+      // - use this to selectively override the table's cell options
+      /* const rows3 = [
+        [
+          { text: 'Top Lft', options: { align: 'left', fontFace: 'Arial' } },
+          { text: 'Top Ctr', options: { align: 'center', fontFace: 'Verdana' } },
+          { text: 'Top Rgt', options: { align: 'right', fontFace: 'Courier' } }
+        ]
+      ]
+      slide.addTable(rows3, { w: 9, rowH: 1, align: 'left', fontFace: 'Arial' }) */
+      // -------
+      // TABLE 1: Cell-level Formatting
+      // -------
       const rows = []
 
       // Row One: cells will be formatted according to any options provided to `addTable()`
@@ -372,6 +393,9 @@ export default {
         { text: '已上线', options },
         { text: '测试', options }
       ])
+
+      // labels: ['美国', '英国', '德国', '法国', '意大利', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      //     values: [1500, 4600, 5156, 3167, 8510, 8009, 6006, 7855, 12102, 12789, 10123, 15121]
 
       slide.addTable(rows,
         {
@@ -585,7 +609,7 @@ export default {
 
       pres.company = '公司'
       // 4. 生成PPT， 括号中的fileName，就是生成的 PPT名字，可以使用 .then 或者 .catch处理对应事件。
-      pres.writeFile({ fileName: '20231124周报6.2.pptx' }).then(() => {
+      pres.writeFile({ fileName: '20231124周报6.1.pptx' }).then(() => {
         this.$Message.success('导出成功')
       })
     },
